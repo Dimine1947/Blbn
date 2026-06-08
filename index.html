@@ -3,44 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الشخصي</title>
+    <title>موقع المانغا الخاص بي</title>
     <style>
+        /* التنسيقات العامة للموقع المستوحاة من الصورة */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e222b; /* لون خلفية داكن وأنيق */
+            color: #ffffff;
             margin: 0;
-            padding: 0;
+            padding: 15px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
         }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
+
+        .container {
+            width: 100%;
+            max-width: 500px; /* جعل العرض متناسقاً ومثالياً للهواتف */
         }
-        h1 {
-            color: #007bff;
-            margin-bottom: 10px;
+
+        /* شريط البحث في الأعلى */
+        .search-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
         }
-        p {
-            font-size: 18px;
-            line-height: 1.6;
+
+        .search-box {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            font-size: 16px;
+            background-color: #f0f2f5;
+            border: none;
+            border-radius: 30px; /* جعل شريط البحث دائرياً بالكامل */
+            box-sizing: border-box;
+            color: #333;
+            outline: none;
+        }
+
+        /* حاوية قائمة المانغا الممتدة */
+        .manga-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* المسافة بين كل مستطيل والآخر */
+            width: 100%;
+        }
+
+        /* تصميم المستطيل (البطاقة) الخاص بكل مانغا */
+        .manga-card {
+            display: flex;
+            align-items: center;
+            background-color: #282e3a; /* لون المستطيل الداكن */
+            border: 1px solid #3f4756;
+            border-radius: 14px;
+            padding: 10px;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* تمييز البطاقة الأولى بإطار أخضر خفيف مثل الصورة المعروضة */
+        .manga-card:first-child {
+            border-color: #487e65;
+        }
+
+        .manga-card:hover {
+            transform: translateY(-2px);
+            border-color: #5865f2; /* يتغير لون الإطار عند التمرير */
+        }
+
+        /* مكان صورة غلاف المانغا */
+        .manga-image {
+            width: 85px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #444; /* خلفية مؤقتة في حال لم تتوفر صورة */
+        }
+
+        /* تفاصيل المانغا الداخلية */
+        .manga-details {
+            flex: 1;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .manga-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 4px 0;
+        }
+
+        .manga-chapter {
+            font-size: 13px;
+            color: #a4b0be;
+            margin: 0 0 6px 0;
+        }
+
+        /* التصنيفات الصغيرة (Tags) */
+        .manga-tags {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tag {
+            background-color: #1e222b;
+            color: #ced6e0;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #3f4756;
+        }
+
+        /* زر القراءة الجانبي */
+        .read-btn {
+            background-color: #2d3748;
+            color: #4cd137; /* لون نص أخضر تفاعلي */
+            border: 1px solid #4cd137;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .manga-card:hover .read-btn {
+            background-color: #4cd137;
+            color: #1e222b;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>مرحباً بك! 👋</h1>
-        <p>هذا هو موقعي الشخصي الجديد المستضاف على GitHub Pages.</p>
-        <p>انتظروا التحديثات القادمة قريباً...</p>
+    <div class="container">
+        
+        <!-- شريط البحث العلوي -->
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="ابحث عن مانغا...">
+        </div>
+
+        <!-- قائمة الـ 15 شكلاً ممتداً للمانغا -->
+        <div class="manga-list">
+            
+            <!-- المانغا 1 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 1</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags">
+                        <span class="tag">Action</span>
+                        <span class="tag">Adventure</span>
+                    </div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 2 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 2</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags">
+                        <span class="tag">Action</span>
+                    </div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 3 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 3</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags">
+                        <span class="tag">Adventure</span>
+                    </div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 4 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 4</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 5 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 5</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 6 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 6</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 7 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 7</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 8 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 8</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 9 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 9</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 10 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 10</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 11 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 11</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 12 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 12</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 13 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 13</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 14 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 14</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+            <!-- المانغا 15 -->
+            <div class="manga-card">
+                <img src="https://via.placeholder.com/85x60" alt="Manga Cover" class="manga-image">
+                <div class="manga-details">
+                    <h2 class="manga-title">اسم المانغا 15</h2>
+                    <p class="manga-chapter">رقم الفصل: #1</p>
+                    <div class="manga-tags"><span class="tag">Action</span></div>
+                </div>
+                <button class="read-btn">Read Now</button>
+            </div>
+
+        </div>
     </div>
 
 </body>
