@@ -139,13 +139,27 @@
     text-align: center;
     font-size: 42px;
     font-weight: 800;
-    color: #e84393; /* اللون الوردي الفخم القريب من الصورة */
-    margin-top: 25px;
+    color: #e84393; /* اللون الوردي المضيء */
+    margin-top: 15px;
     margin-bottom: 15px;
-    /* تأثير إضاءة النيون الوردي والأبيض مثل اللوجو */
     text-shadow: 0 0 10px rgba(232, 67, 147, 0.6), 0 0 20px rgba(232, 67, 147, 0.4);
     font-family: 'Impact', 'Arial Black', sans-serif;
     letter-spacing: 2px;
+    line-height: 1.2; /* لتقريب المسافة العرضية بين التاج والنص */
+}
+
+.brand-dadi {
+    color: #ffffff; /* لون كلمة دادي الأبيض */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* كود التحكم في التاج الملكي */
+.crown-icon {
+    font-size: 38px; /* حجم التاج المناسب فوق الحروف */
+    display: inline-block;
+    margin-bottom: -5px; /* لضبط جلوس التاج تماماً فوق كلمة DADI */
+}
+        
 }
 
 .brand-dadi {
@@ -163,7 +177,12 @@
         
         
         <!-- اسم الموقع المزخرف الكبير -->
-<h1 c<h1 class="site-title"><span class="brand-dadi">DADI</span> QUEEN</h1>
+<h1 c<!-- اسم الموقع مع التاج الملكي فوقه -->
+<h1 class="site-title">
+    <span class="crown-icon">👑</span><br>
+    <span class="brand-dadi">DADI</span> QUEEN
+</h1>
+    
     
 
     <!-- شريط البحث العلوي -->
