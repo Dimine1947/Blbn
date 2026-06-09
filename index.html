@@ -5,45 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DADI QUEEN - موقع المانغا الخاص بي</title>
     <style>
-        /* شاشة التحميل الوردية (تغطي الصفحة كاملة في البداية) */
+        /* شاشة التحميل الوردية */
         #loader-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #ff75a0; /* لون وردي جميل ولطيف */
+            background-color: #ff75a0; /* لون وردي لطيف */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* لجعلها فوق كل شيء في الموقع */
-            transition: opacity 0.5s ease; /* تأثير اختفاء ناعم */
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        /* القطة الصغيرة التي تدور */
-        .loading-cat {
-            font-size: 60px; /* حجم القطة */
-            animation: spin 1.5s linear infinite; /* حركة الدوران المستمرة */
+        /* تنسيق الـ GIF المخصص وحجمه */
+        .loading-cat-img {
+            width: 180px; /* حجم مناسب ومميز للـ GIF */
+            height: auto;
+            animation: none; /* تم إيقاف الدوران ليظهر الـ GIF بحركته الطبيعية */
             margin-bottom: 20px;
+            border-radius: 12px; /* زوايا منحنية ناعمة للصورة */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* ظل خفيف خلف الـ GIF */
         }
 
-        /* نص التحميل أسفل القطة */
+        /* نص التحميل أسفل الـ GIF */
         .loading-text {
             color: #fff;
             font-family: 'Segoe UI', sans-serif;
             font-size: 18px;
             font-weight: bold;
-            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* كود حركة الدوران 360 درجة */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* كود بقية الموقع الأصلي */
+        /* كود الموقع الأصلي */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #1e222b;
@@ -189,9 +186,9 @@
 </head>
 <body>
 
-    <!-- الشاشة الوردية المؤقتة والقطة الدوّارة -->
+    <!-- الشاشة الوردية المؤقتة مع الـ GIF الخاص بك -->
     <div id="loader-screen">
-        <div class="loading-cat">🐱</div>
+        <img src="https://cdn2.hentaigifz.com/58024/cat-with-big-tits.gif" alt="Cat Loading" class="loading-cat-img">
         <div class="loading-text">جاري فتح DADI QUEEN...</div>
     </div>
 
@@ -238,32 +235,19 @@
                 <button class="read-btn">Read Now</button>
             </a>
 
-            <!-- المانغا 3 -->
-            <a href="#" class="manga-card">
-                <img src="https://via.placeholder.com/150x200?text=Manga+Cover" alt="Manga Cover">
-                <div class="manga-details">
-                    <h2 class="manga-title">اسم المانغا 3</h2>
-                    <p class="manga-chapter">رقم الفصل: #1</p>
-                    <div class="manga-tags">
-                        <span class="tag">Adventure</span>
-                    </div>
-                </div>
-                <button class="read-btn">Read Now</button>
-            </a>
-
         </div>
     </div>
 
-    <!-- كود الـ JavaScript المسؤول عن حساب الـ 3 ثواني وإخفاء الشاشة الوردية -->
+    <!-- كود الـ JavaScript لحساب الـ 3 ثواني وإخفاء الشاشة -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader-screen');
-                loader.style.opacity = '0'; // جعلها تختفي بنعومة
+                loader.style.opacity = '0'; // إخفاء ناعم تدريجي
                 setTimeout(() => {
-                    loader.style.display = 'none'; // مسحها تماماً من الشاشة لكي نضغط على الأزرار
-                }, 500); // نصف ثانية تابعة لتأثير الاختفاء الناعم
-            }, 3000); // 3000 ميلي ثانية تعني 3 ثوانٍ بالضبط (يمكنك تغييرها لـ 4000 إذا أردت 4 ثوانٍ)
+                    loader.style.display = 'none'; // إزالة العنصر تماماً من الواجهة
+                }, 500);
+            }, 3000); // مدة الانتظار 3 ثوانٍ قبل الاختفاء
         });
     </script>
 
