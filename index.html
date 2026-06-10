@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilihub | عالم الألعاب والشروحات</title>
-    <!-- استدعاء خط أنيق وأيقونات FontAwesome لتشبه التصميم تماماً -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #1a1d20;
-            --bg-card: #212529;
-            --border-color: #2d3238;
+            --bg-dark: #16181b;
+            --bg-card: #1f2226;
+            --border-color: #2b2f35;
             --accent-blue: #00a8ff;
             --text-light: #f1f2f6;
-            --text-muted: #a0a5ad;
+            --text-muted: #9ea4ad;
         }
 
         body {
@@ -22,27 +21,31 @@
             color: var(--text-light);
             margin: 0;
             padding: 0;
-            user-select: none;
+            overflow-x: hidden;
         }
 
-        /* القائمة العلوية المشتركة (تظهر في صفحة 2 و 3) */
+        /* ==================== القائمة العلوية الذكية والمحسنة ==================== */
         nav {
             background-color: var(--bg-card);
-            padding: 15px 40px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
+            flex-shrink: 0;
         }
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #ffffff;
             text-decoration: none;
@@ -51,227 +54,264 @@
         .ps5-badge {
             background-color: #ffffff;
             color: #003087;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 900;
-            padding: 2px 6px;
+            padding: 1px 5px;
             border-radius: 4px;
             letter-spacing: 0.5px;
-            margin-top: 4px;
         }
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 25px;
+            gap: 15px;
             margin: 0;
             padding: 0;
+            overflow-x: auto; /* يسمح بالتمرير الأفقي على الهواتف دون تخريب الهيدر */
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
+        .nav-links::-webkit-scrollbar { display: none; } /* إخفاء شريط التمرير المزعج */
+        
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             transition: color 0.2s;
+            padding: 5px 2px;
         }
-        .nav-links a.active, .nav-links a:hover { color: #ffffff; }
+        .nav-links a.active, .nav-links a:hover { 
+            color: #ffffff; 
+            border-bottom: 2px solid var(--accent-blue);
+        }
 
-        /* التحكم في ظهور واختفاء الصفحات */
         .page { display: none; }
         .page.active-page { display: block; }
 
-        /* ==================== 1. تنسيق الصفحة الترحيبية ==================== */
+        /* ==================== 1. الصفحة الترحيبية ==================== */
         .welcome-screen {
-            height: 100vh;
+            height: calc(100vh - 60px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #16181b;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .welcome-logo {
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
-        .welcome-logo i { color: var(--accent-blue); font-size: 4rem; }
+        .welcome-logo i { color: var(--accent-blue); font-size: 3rem; }
         .quick-links-title {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 40px;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
         .quick-links {
-            display: flex;
-            gap: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
         }
         .ql-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: var(--text-muted);
             text-decoration: none;
             cursor: pointer;
-            transition: transform 0.2s, color 0.2s;
-            font-size: 1.1rem;
+            font-size: 0.85rem;
+            text-align: center;
         }
         .ql-item i {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--accent-blue);
-            background: rgba(0, 168, 255, 0.1);
-            padding: 20px;
+            background: rgba(0, 168, 255, 0.08);
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.2s;
         }
-        .ql-item:hover { color: #fff; transform: translateY(-5px); }
-        .ql-item:hover i { background: rgba(0, 168, 255, 0.2); }
+        .ql-item:hover i { background: rgba(0, 168, 255, 0.2); transform: translateY(-3px); }
 
-        /* ==================== 2. تنسيق معرض الألعاب ==================== */
+        /* ==================== 2. صفحة معرض الألعاب المتجاوبة ==================== */
         .container {
             max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            margin: 20px auto;
+            padding: 0 15px;
+            box-sizing: border-box;
         }
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            gap: 15px;
         }
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin: 0;
             border-right: 4px solid var(--accent-blue);
-            padding-right: 12px;
+            padding-right: 10px;
         }
         .search-box {
             position: relative;
+            flex-grow: 0;
         }
         .search-box input {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             color: #fff;
-            padding: 10px 35px 10px 15px;
+            padding: 8px 30px 8px 12px;
             border-radius: 20px;
             outline: none;
-            width: 200px;
+            width: 140px;
+            font-size: 0.85rem;
+            transition: width 0.3s;
         }
+        .search-box input:focus { width: 180px; border-color: var(--accent-blue); }
         .search-box i {
             position: absolute;
-            right: 12px;
-            top: 12px;
+            right: 10px;
+            top: 11px;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
+
+        /* تعديل شبكة العرض لتصبح عمودين ممتازين على الهاتف وثلاثة أو أربعة على الكمبيوتر */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         }
+        @media (min-width: 600px) { .games-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 900px) { .games-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1100px) { .games-grid { grid-template-columns: repeat(5, 1fr); } }
+
         .game-card {
             background-color: var(--bg-card);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.2s, border-color 0.2s;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .game-card:hover {
-            transform: translateY(-8px);
+            transform: scale(1.02);
             border-color: var(--accent-blue);
         }
         .game-thumb {
             width: 100%;
-            height: 290px;
-            background-color: #2d3238;
+            aspect-ratio: 3 / 4; /* يحافظ على أبعاد البوستر الاحترافية للألعاب مثل الصورة تماماً */
+            background-color: #25292e;
             background-size: cover;
             background-position: center;
         }
-        .game-info { padding: 15px; }
-        .game-title { font-size: 1.15rem; margin: 0 0 5px 0; color: #fff; }
-        .game-meta { color: var(--text-muted); font-size: 0.85rem; }
+        .game-info { padding: 10px; }
+        .game-title { font-size: 0.95rem; margin: 0 0 4px 0; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .game-meta { color: var(--text-muted); font-size: 0.75rem; }
 
-        /* ==================== 3. تنسيق صفحة تفاصيل اللعبة ==================== */
+        /* ==================== 3. صفحة تفاصيل اللعبة المحدثة ==================== */
         .game-details-wrapper {
             display: flex;
-            gap: 40px;
-            margin-top: 20px;
+            flex-direction: column;
+            gap: 20px;
             background-color: var(--bg-card);
-            padding: 35px;
-            border-radius: 16px;
+            padding: 20px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
+        @media (min-width: 768px) {
+            .game-details-wrapper { flex-direction: row; padding: 30px; gap: 35px; }
+        }
         .details-poster {
-            width: 320px;
-            height: 420px;
-            border-radius: 12px;
+            width: 100%;
+            max-width: 260px;
+            aspect-ratio: 3 / 4;
+            margin: 0 auto;
+            border-radius: 10px;
             background-size: cover;
             background-position: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            flex-shrink: 0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         .details-info { flex-grow: 1; }
-        .details-title { font-size: 2.5rem; margin: 0 0 10px 0; }
-        .rating-stars { color: #f1c40f; font-size: 1.1rem; margin-bottom: 20px; }
-        .rating-stars span { color: var(--text-muted); margin-right: 8px; font-size: 0.9rem; }
-        .details-desc { color: var(--text-muted); line-height: 1.7; margin-bottom: 30px; font-size: 1.05rem; }
+        .details-title { font-size: 1.8rem; margin: 10px 0 5px 0; }
+        .rating-stars { color: #f1c40f; font-size: 0.9rem; margin-bottom: 15px; }
+        .rating-stars span { color: var(--text-muted); margin-right: 5px; font-size: 0.8rem; }
+        .details-desc { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; text-align: justify; }
         
         .spec-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
         }
         .spec-table th, .spec-table td {
-            padding: 10px 15px;
+            padding: 8px 10px;
             text-align: right;
             border-bottom: 1px solid var(--border-color);
         }
-        .spec-table th { color: var(--accent-blue); background-color: rgba(250,250,250,0.02); }
+        .spec-table th { color: var(--accent-blue); font-weight: 600; width: 40%; }
 
         .download-box {
-            background: rgba(0, 168, 255, 0.05);
+            background: rgba(0, 168, 255, 0.04);
             border: 1px dashed var(--accent-blue);
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin-bottom: 25px;
         }
-        .btn-download-container { display: flex; gap: 15px; align-items: center; }
         .btn-main-download {
+            display: inline-block;
             background-color: var(--accent-blue);
             color: #fff;
-            padding: 12px 35px;
-            border-radius: 8px;
+            padding: 10px 25px;
+            border-radius: 6px;
             font-weight: bold;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
             transition: background 0.2s;
         }
+        @media (min-width: 480px) { .btn-main-download { width: auto; } }
         .btn-main-download:hover { background-color: #0097e6; }
         
-        /* التقييمات التشبيهية من الصورة */
-        .reviews-section { margin-top: 40px; }
+        .reviews-section { margin-top: 30px; }
         .review-card {
-            background-color: #1a1d20;
-            padding: 20px;
+            background-color: var(--bg-dark);
+            padding: 15px;
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border: 1px solid var(--border-color);
         }
-        .review-header { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
-        .review-avatar { width: 40px; height: 40px; background: #3d444e; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .user-name { font-weight: bold; font-size: 0.95rem; }
+        .review-header { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+        .review-avatar { width: 35px; height: 35px; background: #2b2f35; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+        .user-name { font-weight: bold; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <!-- ==================== 1. الصفحة الترحيبية (أول دخول للموقع) ==================== -->
-    <div id="page-welcome" class="page active-page class-welcome-screen">
+    <div id="page-welcome" class="page active-page">
+        <nav>
+            <div class="logo-container">
+                <div class="logo"><span>b</span>Bilihub</div>
+                <div class="ps5-badge">PS5</div>
+            </div>
+        </nav>
         <div class="welcome-screen">
             <div class="welcome-logo">
-                <i class="fa-shapes"></i> Bilihub
+                <i class="fa-solid fa-cube"></i>Bilihub
             </div>
             <div class="quick-links-title">Quick Links</div>
             <div class="quick-links">
@@ -279,7 +319,6 @@
                     <i class="fa-regular fa-comments"></i>
                     <span>Forums</span>
                 </div>
-                <!-- تم تغيير كلمة Shop إلى Games بناءً على طلبك -->
                 <div class="ql-item" onclick="navigateTo('page-gallery')">
                     <i class="fa-solid fa-gamepad"></i>
                     <span>Games</span>
@@ -297,7 +336,6 @@
     </div>
 
 
-    <!-- ==================== 2. صفحة معرض الألعاب ==================== -->
     <div id="page-gallery" class="page">
         <nav>
             <div class="logo-container" onclick="navigateTo('page-welcome')">
@@ -305,7 +343,7 @@
                 <div class="ps5-badge">PS5</div>
             </div>
             <ul class="nav-links">
-                <li><a href="#" class="active">Games</a></li>
+                <li><a href="#" onclick="navigateTo('page-gallery')" class="active">Games</a></li>
                 <li><a href="#">Forums</a></li>
                 <li><a href="#">News</a></li>
                 <li><a href="#">Reviews</a></li>
@@ -316,20 +354,17 @@
             <div class="section-header">
                 <h2 class="section-title">Games</h2>
                 <div class="search-box">
-                    <input type="text" placeholder="بحث عن لعبة...">
+                    <input type="text" placeholder="بحث...">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
 
-            <!-- شبكة الألعاب - اضغط على أي لعبة لفتح الصفحة الثالثة -->
             <div class="games-grid" id="games-container">
-                <!-- الألعاب سيتم توليدها تلقائياً عبر الجافاسكربت بالأسفل -->
-            </div>
+                </div>
         </div>
     </div>
 
 
-    <!-- ==================== 3. صفحة تفاصيل اللعبة والتحميل ==================== -->
     <div id="page-details" class="page">
         <nav>
             <div class="logo-container" onclick="navigateTo('page-gallery')">
@@ -338,27 +373,25 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#" class="active">Download</a></li>
-                <li><a href="#" onclick="navigateTo('page-gallery')">Back to Games</a></li>
+                <li><a href="#" onclick="navigateTo('page-gallery')">Back</a></li>
             </ul>
         </nav>
 
         <div class="container" id="details-container">
-            <!-- سيتم تعبئة تفاصيل اللعبة المحددة هنا dynamically -->
-        </div>
+            </div>
     </div>
 
-    <!-- جافا سكريبت الذكية للربط بين الصفحات والعرض التلقائي للمعلومات -->
     <script>
-        // داتا الألعاب المرفوعة على موقعك وصور بوسترات مميزة لكل لعبة جاهزة ومجانية
+        // داتا الألعاب متضمنة صور بوسترات رأسية عالية الدقة والوضوح ومجانية بالكامل ومثالية لموقعك
         const gamesData = [
             {
                 id: "warzone",
                 title: "Call of Duty: Warzone",
                 category: "شوتر / باتل رويال",
-                img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400&auto=format&fit=crop",
-                desc: "تجربة الباتل رويال الضخمة والمجانية بالكامل من سلسلة Call of Duty الشهيرة، انزل مع فريقك واصمد حتى النهاية في مواجهات حماسية بمعدل إطارات مرتفع وسلس.",
-                cpu: "Intel Core i5-2500K / AMD Ryzen R5 1600X",
-                gpu: "NVIDIA GTX 970 / GTX 1660 Super",
+                img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500&auto=format&fit=crop",
+                desc: "تجربة الباتل رويال الأقوى والمجانية بالكامل من سلسلة Call of Duty. انزل مع أصدقائك، اجمع العتاد واشتبك في معارك طاحنة وشرسة للبقاء على قيد الحياة حتى النهاية.",
+                cpu: "Intel Core i5-2500K / AMD R5 1600X",
+                gpu: "NVIDIA GTX 970 / GTX 1660",
                 ram: "12 GB RAM",
                 size: "65 GB"
             },
@@ -366,38 +399,38 @@
                 id: "bloodstrike",
                 title: "Blood Strike",
                 category: "FPS / ألعاب سريعة",
-                img: "https://images.unsplash.com/photo-1553481187-be93c21490a9?q=80&w=400&auto=format&fit=crop",
-                desc: "لعبة باتل رويال سريعة الوتيرة ومخصصة للعمل بأعلى كفاءة وسلاسة على الأجهزة المتوسطة والقوية، استمتع بالحركة السريعة والباركور أثناء القتال الحاد.",
+                img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=500&auto=format&fit=crop",
+                desc: "لعبة شوتر سريعة الحركة مصممة بذكاء لتعمل بأعلى أداء وسلاسة مذهلة على كافة الأجهزة الضعيفة والمتوسطة مع الحفاظ على رسوميات تكتيكية قوية وممتعة.",
                 cpu: "Intel Core i3 أو ما يعادله",
                 gpu: "NVIDIA GTX 750 Ti",
-                ram: "6 GB RAM",
+                ram: "6 GB",
                 size: "4 GB"
             },
             {
                 id: "gta5",
                 title: "Grand Theft Auto V",
                 category: "عالم مفتوح / أكشن",
-                img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=400&auto=format&fit=crop",
-                desc: "عش مغامرة العالم المفتوح الأسطورية في مدينة لوس سانتوس، نفذ السرقات الكبرى واستمتع بأقوى مودات الحياة الواقعية واللعب الجماعي الممتع.",
-                cpu: "Intel Core i5 3470 / AMD FX 8350",
+                img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=500&auto=format&fit=crop",
+                desc: "لعبة العالم المفتوح الأكثر مبيعاً بالتاريخ. قم بالتجول في لوس سانتوس، نفذ السرقات الكبرى، واستمتع بطور اللعب الجماعي ومودات الحياة الواقعية اللانهائية.",
+                cpu: "Intel Core i5 3470",
                 gpu: "NVIDIA GTX 660 2GB",
-                ram: "8 GB RAM",
+                ram: "8 GB",
                 size: "110 GB"
             },
             {
                 id: "minecraft",
-                title: "Minecraft",
-                category: "بناء / نجاة / عالم مفتوح",
-                img: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?q=80&w=400&auto=format&fit=crop",
-                desc: "ابنِ عالمك الخاص، استكشف الكهوف، واجه الوحوش في الليل أو العب في أطوار الأونلاين والـ Bedwars مع أصدقائك بوضعيات ومودات لا حصر لها.",
-                cpu: "Intel Core i3-3210 / AMD A8-7600",
-                gpu: "Intel HD Graphics 4000 / AMD Radeon R5",
-                ram: "4 GB RAM",
+                title: "Minecraft PC",
+                category: "بناء / نجاة / مغامرة",
+                img: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?q=80&w=500&auto=format&fit=crop",
+                desc: "عالم لا حصر له من الإبداع، ابنِ قلاعك الخاصة، واجه الكائنات الليلية الخطيرة في طور النجاة، أو نافس رفاقك في السيرفرات الجماعية ومودات الحرب.",
+                cpu: "Intel Core i3-3210",
+                gpu: "Intel HD Graphics 4000",
+                ram: "4 GB",
                 size: "2 GB"
             }
         ];
 
-        // تنصيب وعرض الألعاب في الصفحة الثانية
+        // بناء المعرض
         const grid = document.getElementById('games-container');
         gamesData.forEach(game => {
             const card = document.createElement('div');
@@ -413,14 +446,12 @@
             grid.appendChild(card);
         });
 
-        // دالة التنقل الفوري بين الصفحات بالأنيميشن المريح للعين
         function navigateTo(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.getElementById(pageId).classList.add('active-page');
             window.scrollTo(0, 0);
         }
 
-        // دالة فتح وعرض اللعبة المختارة بالصفحة الثالثة بالتفاصيل والتقييمات
         function openGameDetails(gameId) {
             const game = gamesData.find(g => g.id === gameId);
             const detailsContainer = document.getElementById('details-container');
@@ -436,39 +467,37 @@
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star-half-stroke"></i>
-                            <span>(4.8 تقييم من زوار Bilihub)</span>
+                            <span>(4.8 تقييم من زوار الموقع)</span>
                         </div>
                         <p class="details-desc">${game.desc}</p>
                         
-                        <h3 style="color:#fff; margin-bottom:15px;"><i class="fa-solid fa-microchip" style="color:var(--accent-blue)"></i> متطلبات التشغيل الموصى بها:</h3>
+                        <h3 style="color:#fff; font-size:1.1rem; margin-bottom:10px;"><i class="fa-solid fa-microchip" style="color:var(--accent-blue)"></i> متطلبات تشغيل اللعبة:</h3>
                         <table class="spec-table">
-                            <tr><th>المعالج (CPU)</th><td>${game.cpu}</td></tr>
-                            <tr><th>كرت الشاشة (GPU)</th><td>${game.gpu}</td></tr>
-                            <tr><th>الذاكرة العشوائية</th><td>${game.ram}</td></tr>
-                            <tr><th>المساحة المطلوبة</th><td>${game.size}</td></tr>
+                            <tr><th>المعالج</th><td>${game.cpu}</td></tr>
+                            <tr><th>كرت الشاشة</th><td>${game.gpu}</td></tr>
+                            <tr><th>الرام</th><td>${game.ram}</td></tr>
+                            <tr><th>المساحة</th><td>${game.size}</td></tr>
                         </table>
 
                         <div class="download-box">
-                            <h4 style="margin:0 0 10px 0; color:#fff;"><i class="fa-solid fa-circle-info" style="color:var(--accent-blue)"></i> تنبيه تخطي الروابط:</h4>
-                            <p style="margin:0 0 15px 0; font-size:0.9rem; color:var(--text-muted)">إذا واجهت أي إعلانات منبثقة، يرجى مراجعة صفحة "شروحات التخطي" لتصل إلى الرابط المباشر في أقل من 10 ثوانٍ!</p>
-                            <div class="btn-download-container">
-                                <a href="#" class="btn-main-download" onclick="alert('سيتم تحويلك لصفحة تحميل ملفات اللعبة المؤمنة عبر Bilihub')"><i class="fa-solid fa-download"></i> تحميل اللعبة الآن</a>
-                            </div>
+                            <h4 style="margin:0 0 5px 0; color:#fff;"><i class="fa-solid fa-circle-info" style="color:var(--accent-blue)"></i> تنبيه تخطي الروابط الإعلانية:</h4>
+                            <p style="margin:0 0 12px 0; font-size:0.8rem; color:var(--text-muted)">إذا واجهتك نوافذ منبثقة مزعجة، لا تقلق! انتظر التنازلي وتخطى الإعلانات فوراً للوصول لملف اللعبة المباشر.</p>
+                            <a href="#" class="btn-main-download" onclick="alert('سيتم توجيهك الآن لروابط تحميل ملفات اللعبة بأمان عبر Bilihub!')"><i class="fa-solid fa-download"></i> تحميل اللعبة برابط مباشر</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="reviews-section">
-                    <h3 class="section-title">مراجعات وتعليقات اللاعبين (User Reviews)</h3>
+                    <h3 class="section-title">مراجعات اللاعبين</h3>
                     <div class="review-card">
                         <div class="review-header">
-                            <div class="review-avatar"><i class="fa-solid fa-user-ninja"></i></div>
+                            <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                             <div>
-                                <div class="user-name">ميدو جيمر</div>
-                                <div style="color:#f1c40f; font-size:0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <div class="user-name">زائر محترف</div>
+                                <div style="color:#f1c40f; font-size:0.7rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                             </div>
                         </div>
-                        <p style="margin:0; color:var(--text-muted); font-size:0.95rem;">الروابط سريعة جداً والشرح المرفق ساعدني لتخطي الإعلانات بسهولة تامة، الموقع خفيف جداً وممتاز على الـ 240Hz!</p>
+                        <p style="margin:0; color:var(--text-muted); font-size:0.85rem;">الموقع والروابط تعمل بنجاح مذهل على هاتفي وحاسوبي، التنسيق الرمادي مريح جداً للعين أثناء الليل!</p>
                     </div>
                 </div>
             `;
