@@ -3,226 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bili shop</title>
+<title>Bili Shop</title>
 
 <style>
-body{
-    margin:0;
-    background:#000;
-    color:white;
-    font-family:Arial;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #000;
+        color: white;
+    }
 
-header{
-    background:#111;
-    padding:25px;
-    text-align:center;
-}
+    header {
+        background: #111;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+    }
 
-.container{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
-    padding:20px;
-    max-width:1400px;
-    margin:auto;
-}
+    header h1 {
+        margin: 0;
+        font-size: 40px;
+    }
 
-.product{
-    background:#1a1a1a;
-    border-radius:15px;
-    padding:15px;
-}
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: auto;
+    }
 
-.image{
-    height:250px;
-    background:#333;
-    border-radius:10px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:15px;
-}
+    .product {
+        background: #1a1a1a;
+        border-radius: 25px;
+        overflow: hidden;
+        text-align: center;
+        transition: 0.3s;
+    }
 
-button{
-    width:100%;
-    padding:12px;
-    background:white;
-    color:black;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-}
+    .product:hover {
+        transform: translateY(-5px);
+    }
 
-.pages{
-    text-align:center;
-    padding:20px;
-}
+    .product img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
 
-.pages a{
-    color:white;
-    text-decoration:none;
-    margin:0 10px;
-}
+    .product h3 {
+        margin: 15px 0 5px;
+    }
+
+    .price {
+        color: #00ff88;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .btn {
+        display: inline-block;
+        margin: 15px;
+        padding: 12px 25px;
+        background: white;
+        color: black;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: bold;
+    }
+
+    .pagination {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .pagination button {
+        padding: 10px 15px;
+        margin: 5px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .active {
+        background: white;
+        color: black;
+    }
 </style>
-
 </head>
 
 <body>
 
 <header>
-    <h1>متجر الملابس</h1>
+    <h1>Bili Shop</h1>
+    <p>أفضل الألبسة بأفضل الأسعار</p>
 </header>
 
-<div class="container">
+<div class="products" id="products"></div>
 
-    <div class="product">
-        <div class="image">صورة المنتج 1</div>
-        <h3>المنتج 1</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 2</div>
-        <h3>المنتج 2</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 3</div>
-        <h3>المنتج 3</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 4</div>
-        <h3>المنتج 4</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 5</div>
-        <h3>المنتج 5</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 6</div>
-        <h3>المنتج 6</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 7</div>
-        <h3>المنتج 7</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 8</div>
-        <h3>المنتج 8</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 9</div>
-        <h3>المنتج 9</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 10</div>
-        <h3>المنتج 10</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 11</div>
-        <h3>المنتج 11</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 12</div>
-        <h3>المنتج 12</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 13</div>
-        <h3>المنتج 13</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 14</div>
-        <h3>المنتج 14</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 15</div>
-        <h3>المنتج 15</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 16</div>
-        <h3>المنتج 16</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 17</div>
-        <h3>المنتج 17</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 18</div>
-        <h3>المنتج 18</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 19</div>
-        <h3>المنتج 19</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
-    <div class="product">
-        <div class="image">صورة المنتج 20</div>
-        <h3>المنتج 20</h3>
-        <p>السعر: 0000 دج</p>
-        <button>اطلب الآن</button>
-    </div>
-
+<div class="pagination">
+    <button onclick="changePage(1)" class="active" id="btn1">1</button>
+    <button onclick="changePage(2)" id="btn2">2</button>
+    <button onclick="changePage(3)" id="btn3">3</button>
+    <button onclick="changePage(4)" id="btn4">4</button>
 </div>
 
-<div class="pages">
-    <a href="page2.html">الصفحة 2</a>
-    <a href="page3.html">الصفحة 3</a>
-    <a href="page4.html">الصفحة 4</a>
-</div>
+<script>
+const products = [];
+
+for (let i = 1; i <= 80; i++) {
+    products.push({
+        name: "منتج " + i,
+        price: (2000 + i * 50) + " دج",
+        image: "https://picsum.photos/300/300?random=" + i
+    });
+}
+
+function changePage(page) {
+    const container = document.getElementById("products");
+
+    document.querySelectorAll(".pagination button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    document.getElementById("btn" + page)
+        .classList.add("active");
+
+    container.innerHTML = "";
+
+    const start = (page - 1) * 20;
+    const end = start + 20;
+
+    products.slice(start, end).forEach(product => {
+        container.innerHTML += `
+            <div class="product">
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p class="price">${product.price}</p>
+
+                <a class="btn"
+                   href="https://wa.me/213XXXXXXXXX?text=أريد طلب ${product.name}">
+                   اطلب الآن
+                </a>
+            </div>
+        `;
+    });
+}
+
+changePage(1);
+</script>
 
 </body>
 </html>
