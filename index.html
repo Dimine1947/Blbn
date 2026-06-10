@@ -3,285 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bili shop - متجر البيع والشراء في الجزائر</title>
+    <title>متجر bili shop للألبسة</title>
     <style>
-        /* تنسيق الألوان العام للمتجر (أسود، رمادي، مع لمسات أزرق وبنفسجي ذكي) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f1115;
-            color: #ffffff;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* الهيدر وشريط التنقل */
+        header {
+            background-color: #ffffff;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e91e63; /* لون أنثوي وعصري */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e91e63;
+        }
+
+        .cart-icon {
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* واجهة العرض الرئيسية (Hero Section) */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 400px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
         }
 
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn-shop {
+            background-color: #e91e63;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-shop:hover {
+            background-color: #c2185b;
+        }
+
+        /* قسم المنتجات */
         .container {
-            width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        /* رأس الموقع */
-        .store-header {
+        .section-title {
             text-align: center;
             margin-bottom: 30px;
-            padding: 30px;
-            background: linear-gradient(135deg, #1a1d24, #232832);
-            border-radius: 20px;
-            border: 1px solid #2d323f;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            font-size: 28px;
+            position: relative;
         }
 
-        .store-title {
-            font-size: 40px;
-            margin: 0;
-            color: #00d2ff;
-            font-weight: 800;
-            letter-spacing: 1px;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #e91e63;
+            margin: 10px auto 0;
         }
 
-        .store-title span {
-            color: #9b51e0;
-        }
-
-        .store-desc {
-            color: #a0a5b5;
-            font-size: 15px;
-            margin-top: 8px;
-        }
-
-        /* شريط التصفية (جديد / مستعمل) */
-        .filter-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            background-color: #1a1d24;
-            color: #a0a5b5;
-            border: 1px solid #2d323f;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background-color: #00d2ff;
-            color: #0f1115;
-            border-color: #00d2ff;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
-        }
-
-        /* شبكة عرض المنتجات */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
         }
 
-        /* بطاقة المنتج */
         .product-card {
-            background-color: #1a1d24;
-            border-radius: 16px;
+            background-color: white;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #2d323f;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            text-align: center;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            border-color: #9b51e0;
-            box-shadow: 0 5px 20px rgba(155, 81, 224, 0.2);
         }
 
-        /* شارات الحالة (مستعمل أو جديد) */
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 10;
-        }
-
-        .badge.used {
-            background-color: #ff9f43;
-            color: #0f1115;
-        }
-
-        .badge.new {
-            background-color: #2ed573;
-            color: #fff;
-        }
-
-        /* مكان صورة المنتج */
-        .product-img-box {
+        .product-image {
             width: 100%;
-            height: 200px;
-            background-color: #232832;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #525866;
-            font-weight: bold;
-            border-bottom: 1px solid #2d323f;
+            height: 300px;
+            object-fit: cover;
         }
 
-        .product-details {
+        .product-info {
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
         }
 
         .product-title {
-            font-size: 19px;
-            margin: 0 0 10px 0;
-            color: #fff;
-            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
         }
 
         .product-price {
-            font-size: 22px;
-            color: #00d2ff;
+            color: #e91e63;
             font-weight: bold;
+            font-size: 16px;
             margin-bottom: 15px;
         }
 
-        .product-meta {
-            font-size: 13px;
-            color: #828899;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* أزرار الاتصال */
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: auto;
-        }
-
-        .btn-call {
-            flex: 1;
-            background-color: #9b51e0;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
-
-        .btn-call:hover {
-            background-color: #8334d2;
-        }
-
-        .btn-details {
-            background-color: #232832;
-            color: #fff;
-            border: 1px solid #2d323f;
-            padding: 12px 15px;
-            border-radius: 10px;
+        .btn-add-cart {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
+            width: 100%;
+            transition: background 0.3s;
         }
 
-        .btn-details:hover {
-            background-color: #2d323f;
+        .btn-add-cart:hover {
+            background-color: #e91e63;
+        }
+
+        /* الفوتر (أسفل الصفحة) */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- الهيدر -->
+    <header>
+        <div class="logo">FEM QUEEN</div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#">فساتين</a>
+            <a href="#">ملابس كاجوال</a>
+            <a href="#">تخفيضات</a>
+        </nav>
+        <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
+    </header>
+
+    <!-- واجهة ترحيبية -->
+    <section class="hero">
+        <h1>أحدث صيحات الموضة والأناقة</h1>
+        <p>اكتشفي تشكيلتنا الجديدة والمميزة لعام 2026</p>
+        <a href="#products" class="btn-shop">تسوقي الآن</a>
+    </section>
+
+    <!-- المنتجات -->
+    <div class="container" id="products">
+        <h2 class="section-title">المنتجات المميزة</h2>
         
-        <!-- رأس المتجر الرئيسي -->
-        <div class="store-header">
-            <h1 class="store-title">FEM <span>MARKET</span></h1>
-            <p class="store-desc">منصتك المفضلة لشراء وبيع السلع الجديدة والمستعملة في الجزائر</p>
-        </div>
-
-        <!-- أزرار التصفية السريعة -->
-        <div class="filter-bar">
-            <button class="filter-btn active">كل السلع</button>
-            <button class="filter-btn">جديد ✨</button>
-            <button class="filter-btn">مستعمل 🔄</button>
-        </div>
-
-        <!-- شبكة المنتجات -->
         <div class="products-grid">
-
-            <!-- المنتج الأول (مثال: هاتف مستعمل) -->
+            <!-- منتج 1 -->
             <div class="product-card">
-                <span class="badge used">مستعمل (حالة ممتازة)</span>
-                <div class="product-img-box">صورة الهاتف هنا</div>
-                <div class="product-details">
-                    <h3 class="product-title">الهاتف الذكي Xiaomi 11T Pro</h3>
-                    <div class="product-price">48,000 دج (4 ملايين و 800)</div>
-                    <div class="product-meta">
-                        <span>📍 وهران</span>
-                        <span>📅 منذ ساعتين</span>
-                    </div>
-                    <div class="action-buttons">
-                        <a href="tel:0555555555" class="btn-call">📞 اتصل بالبائع</a>
-                        <a href="#" class="btn-details">التفاصيل</a>
-                    </div>
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=500&q=80" alt="فستان أنيق" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">فستان سهرة أنيق</h3>
+                    <div class="product-price">4,500 د.ج</div>
+                    <button class="btn-add-cart" onclick="addToCart()">إضافة للسلة</button>
                 </div>
             </div>
 
-            <!-- المنتج الثاني (مثال: شاشة قيمنق جديدة) -->
+            <!-- منتج 2 -->
             <div class="product-card">
-                <span class="badge new">جديد في العلبة</span>
-                <div class="product-img-box">صورة الشاشة هنا</div>
-                <div class="product-details">
-                    <h3 class="product-title">شاشة قيمنق 240Hz الاحترافية</h3>
-                    <div class="product-price">35,000 دج (3 ملايين و 500)</div>
-                    <div class="product-meta">
-                        <span>📍 الجزائر العاصمة</span>
-                        <span>📅 اليوم</span>
-                    </div>
-                    <div class="action-buttons">
-                        <a href="tel:0666666666" class="btn-call">📞 اتصل بالبائع</a>
-                        <a href="#" class="btn-details">التفاصيل</a>
-                    </div>
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80" alt="ملابس كاجوال" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">طقم كاجوال عصري</h3>
+                    <div class="product-price">6,200 د.ج</div>
+                    <button class="btn-add-cart" onclick="addToCart()">إضافة للسلة</button>
                 </div>
             </div>
 
-            <!-- المنتج الثالث (مثال: حاسوب قيمنق مستعمل) -->
+            <!-- منتج 3 -->
             <div class="product-card">
-                <span class="badge used">مستعمل</span>
-                <div class="product-img-box">صورة الحاسوب هنا</div>
-                <div class="product-details">
-                    <h3 class="product-title">حاسوب قيمنق RTX 3060 Ti / Ryzen 5</h3>
-                    <div class="product-price">120,000 دج (12 مليون)</div>
-                    <div class="product-meta">
-                        <span>📍 قسنطينة</span>
-                        <span>📅 أمس</span>
-                    </div>
-                    <div class="action-buttons">
-                        <a href="tel:0777777777" class="btn-call">📞 اتصل بالبائع</a>
-                        <a href="#" class="btn-details">التفاصيل</a>
-                    </div>
+                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=500&q=80" alt="قميص نسائي" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">قميص صيفي مريح</h3>
+                    <div class="product-price">2,800 د.ج</div>
+                    <button class="btn-add-cart" onclick="addToCart()">إضافة للسلة</button>
                 </div>
             </div>
-
         </div>
     </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>&copy; 2026 جميع الحقوق محفوظة لمتجر FEM QUEEN</p>
+    </footer>
+
+    <!-- سكربت بسيط لتحديث السلة -->
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert('تم إضافة المنتج إلى سلة المشتريات!');
+        }
+    </script>
 
 </body>
 </html>
