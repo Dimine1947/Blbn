@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر bili shop للألبسة</title>
     <style>
+        /* إعدادات عامة */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,27 +14,29 @@
         }
 
         body {
-            background-color: #f9f9f9;
+            background-color: #f8f9fa;
             color: #333;
+            scroll-behavior: smooth;
         }
 
-        /* الهيدر وشريط التنقل */
+        /* شريط التنقل (Header) */
         header {
             background-color: #ffffff;
-            padding: 20px 10%;
+            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #e91e63; /* لون أنثوي وعصري */
+            font-size: 26px;
+            font-weight: 800;
+            color: #e91e63;
+            letter-spacing: 1px;
         }
 
         nav a {
@@ -49,15 +52,20 @@
         }
 
         .cart-icon {
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
             position: relative;
+            background: #fff0f5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #e91e63;
         }
 
-        /* واجهة العرض الرئيسية (Hero Section) */
+        /* الواجهة الرئيسية (Hero Section) */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
-            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 450px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -68,77 +76,84 @@
         }
 
         .hero h1 {
-            font-size: 42px;
+            font-size: 46px;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
 
         .hero p {
-            font-size: 18px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 25px;
+            max-width: 600px;
         }
 
         .btn-shop {
             background-color: #e91e63;
             color: white;
-            padding: 12px 30px;
+            padding: 14px 35px;
             border: none;
-            border-radius: 25px;
-            font-size: 16px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .btn-shop:hover {
             background-color: #c2185b;
+            transform: scale(1.05);
         }
 
-        /* قسم المنتجات */
+        /* الحاوية الرئيسية */
         .container {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 50px auto;
             padding: 0 20px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
-            position: relative;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: #222;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 50px;
-            height: 3px;
+            width: 60px;
+            height: 4px;
             background-color: #e91e63;
-            margin: 10px auto 0;
+            margin: 12px auto 0;
+            border-radius: 2px;
         }
 
+        /* شبكة المنتجات */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .product-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
+            border: 1px solid #eee;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .product-image {
             width: 100%;
-            height: 300px;
+            height: 350px;
             object-fit: cover;
         }
 
@@ -147,26 +162,29 @@
         }
 
         .product-title {
-            font-size: 18px;
+            font-size: 19px;
             margin-bottom: 10px;
             color: #333;
+            font-weight: 600;
         }
 
         .product-price {
             color: #e91e63;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 15px;
         }
 
         .btn-add-cart {
-            background-color: #333;
+            background-color: #222;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 12px 20px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
+            font-size: 15px;
+            font-weight: 600;
             transition: background 0.3s;
         }
 
@@ -174,86 +192,289 @@
             background-color: #e91e63;
         }
 
-        /* الفوتر (أسفل الصفحة) */
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
+        /* قسم سلة المشتريات والاستمارة */
+        .checkout-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
             margin-top: 60px;
+            border: 1px solid #eee;
+            display: none; /* تظهر فقط عند إضافة منتجات */
+        }
+
+        .cart-summary {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #eee;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            background: #fdfdfd;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #ff3333;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .total-price {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 15px;
+            color: #222;
+        }
+
+        /* تصميم الاستمارة */
+        .order-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .order-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #e91e63;
+        }
+
+        .btn-submit-order {
+            grid-column: 1 / -1;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit-order:hover {
+            background-color: #43a047;
+        }
+
+        /* أسفل الصفحة (Footer) */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 25px;
+            margin-top: 80px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر -->
+    <!-- شريط علوي -->
     <header>
         <div class="logo">FEM QUEEN</div>
         <nav>
             <a href="#">الرئيسية</a>
-            <a href="#">فساتين</a>
-            <a href="#">ملابس كاجوال</a>
-            <a href="#">تخفيضات</a>
+            <a href="#products">المنتجات</a>
+            <a href="#checkout">إتمام الطلب</a>
         </nav>
-        <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
+        <div class="cart-icon" onclick="scrollToCart()">🛒 السلة (<span id="cart-count">0</span>)</div>
     </header>
 
-    <!-- واجهة ترحيبية -->
+    <!-- واجهة المتجر الرئيسية -->
     <section class="hero">
-        <h1>أحدث صيحات الموضة والأناقة</h1>
-        <p>اكتشفي تشكيلتنا الجديدة والمميزة لعام 2026</p>
-        <a href="#products" class="btn-shop">تسوقي الآن</a>
+        <h1>أناقتكِ تبدأ من هنا</h1>
+        <p>اكتشفي أحدث تشكيلات الملابس العصرية بجودة عالية وتوصيل سريع لكافة الولايات</p>
+        <a href="#products" class="btn-shop">تصفحي المجموعات</a>
     </section>
 
-    <!-- المنتجات -->
+    <!-- حاوية المنتجات -->
     <div class="container" id="products">
-        <h2 class="section-title">المنتجات المميزة</h2>
+        <h2 class="section-title">أحدث الموديلات متوفرة الآن</h2>
         
         <div class="products-grid">
             <!-- منتج 1 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=500&q=80" alt="فستان أنيق" class="product-image">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=500&q=80" alt="فستان صيفي" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">فستان سهرة أنيق</h3>
-                    <div class="product-price">4,500 د.ج</div>
-                    <button class="btn-add-cart" onclick="addToCart()">إضافة للسلة</button>
+                    <h3 class="product-title">فستان صيفي ناعم</h3>
+                    <div class="product-price">3,900 د.ج</div>
+                    <button class="btn-add-cart" onclick="addToCart('فستان صيفي ناعم', 3900)">إضافة إلى السلة</button>
                 </div>
             </div>
 
             <!-- منتج 2 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80" alt="ملابس كاجوال" class="product-image">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80" alt="طقم كاجوال" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">طقم كاجوال عصري</h3>
-                    <div class="product-price">6,200 د.ج</div>
-                    <button class="btn-add-cart" onclick="addToCart()">إضافة للسلة</button>
+                    <h3 class="product-title">طقم كاجوال خريفي</h3>
+                    <div class="product-price">5,800 د.ج</div>
+                    <button class="btn-add-cart" onclick="addToCart('طقم كاجوال خريفي', 5800)">إضافة إلى السلة</button>
                 </div>
             </div>
 
             <!-- منتج 3 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=500&q=80" alt="قميص نسائي" class="product-image">
+                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=500&q=80" alt="قميص كلاسيك" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">قميص صيفي مريح</h3>
-                    <div class="product-price">2,800 د.ج</div>
-                    <button class="btn-add-cart" onclick="addToCart()">إضافة للسلة</button>
+                    <h3 class="product-title">قميص كلاسيكي عصري</h3>
+                    <div class="product-price">2,500 د.ج</div>
+                    <button class="btn-add-cart" onclick="addToCart('قميص كلاسيكي عصري', 2500)">إضافة إلى السلة</button>
                 </div>
             </div>
         </div>
+
+        <!-- قسم السلة وتأكيد الطلب -->
+        <div class="checkout-section" id="checkout">
+            <h2 class="section-title" style="font-size: 24px; margin-bottom: 20px;">تأكيد طلبك (الدفع عند الاستلام)</h2>
+            
+            <div class="cart-summary">
+                <div id="cart-items-list">
+                    <!-- سيمتلئ تلقائياً عبر الجافاسكربت -->
+                </div>
+                <div class="total-price">الإجمالي الإجمالي: <span id="total-amount">0</span> د.ج</div>
+            </div>
+
+            <!-- استمارة معلومات الزبون -->
+            <form class="order-form" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل:</label>
+                    <input type="text" id="name" required placeholder="محمد بن علي">
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف:</label>
+                    <input type="tel" id="phone" required placeholder="06XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="wilaya">الولاية:</label>
+                    <select id="wilaya" required>
+                        <option value="">اختر الولاية</option>
+                        <option value="الجزائر">01 - أدرار</option>
+                        <option value="الشلف">02 - الشلف</option>
+                        <option value="الأغواط">03 - الأغواط</option>
+                        <option value="الجزائر العاصمة">16 - الجزائر العاصمة</option>
+                        <option value="وهران">31 - وهران</option>
+                        <option value="قسنطينة">25 - قسنطينة</option>
+                        <!-- يمكنك إضافة باقي الولايات هنا -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address">العنوان الدقيق للبلدية والشارع:</label>
+                    <input type="text" id="address" required placeholder="اسم البلدية وحي...">
+                </div>
+                <button type="submit" class="btn-submit-order">🚀 تأكيد الطلب الآن</button>
+            </form>
+        </div>
     </div>
 
-    <!-- الفوتر -->
+    <!-- تذييل الصفحة -->
     <footer>
-        <p>&copy; 2026 جميع الحقوق محفوظة لمتجر FEM QUEEN</p>
+        <p>&copy; 2026 متجر FEM QUEEN للألبسة. جميع الحقوق محفوظة.</p>
     </footer>
 
-    <!-- سكربت بسيط لتحديث السلة -->
+    <!-- نظام إدارة السلة بالـ JavaScript -->
     <script>
-        let count = 0;
-        function addToCart() {
-            count++;
-            document.getElementById('cart-count').innerText = count;
-            alert('تم إضافة المنتج إلى سلة المشتريات!');
+        let cart = [];
+
+        function addToCart(title, price) {
+            // إضافة المنتج للمصفوفة
+            cart.push({ title, price });
+            updateCartUI();
+            
+            // إظهار قسم الاستمارة لأن السلة أصبحت تحتوي على منتجات
+            document.getElementById('checkout').style.display = 'block';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            
+            // إخفاء الاستمارة إذا فرغت السلة
+            if(cart.length === 0) {
+                document.getElementById('checkout').style.display = 'none';
+            }
+        }
+
+        function updateCartUI() {
+            // تحديث عدد العناصر في الهيدر
+            document.getElementById('cart-count').innerText = cart.length;
+
+            // تحديث قائمة المنتجات داخل الاستمارة
+            const listContainer = document.getElementById('cart-items-list');
+            listContainer.innerHTML = '';
+            
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                listContainer.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.title} (${item.price} د.ج)</span>
+                        <button class="btn-remove" onclick="removeFromCart(${index})">حذف</button>
+                    </div>
+                `;
+            });
+
+            // تحديث المجموع الإجمالي
+            document.getElementById('total-amount').innerText = total.toLocaleString();
+        }
+
+        function scrollToCart() {
+            if(cart.length > 0) {
+                document.getElementById('checkout').scrollIntoView();
+            } else {
+                alert('سلة المشتريات فارغة حالياً، قم بإضافة ملابس أولاً!');
+            }
+        }
+
+        function submitOrder(event) {
+            event.preventDefault(); // منع الصفحة من إعادة التحميل
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const wilaya = document.getElementById('wilaya').value;
+            const address = document.getElementById('address').value;
+
+            // هنا يمكنك ربط البيانات لإرسالها لـبريدك الإلكتروني أو حفظها
+            alert(`شكراً لك يا ${name}! تم تسجيل طلبك بنجاح.\nسيتصل بك فريق FEM QUEEN لتأكيد الشحن إلى ولاية ${wilaya} في أقرب وقت.`);
+            
+            // تفريغ السلة بعد الطلب
+            cart = [];
+            updateCartUI();
+            document.getElementById('checkout').style.display = 'none';
+            document.querySelector('.order-form').reset();
         }
     </script>
 
