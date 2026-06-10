@@ -24,6 +24,11 @@
             border-bottom: 1px solid #2d3238;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
@@ -34,7 +39,21 @@
             text-decoration: none;
         }
         .logo span {
-            color: #00a8ff; /* اللون الأزرق المميز للشعار في الصورة */
+            color: #00a8ff; /* اللون الأزرق المميز للشعار */
+        }
+        /* تصميم شارة PS5 الصغيرة */
+        .ps5-badge {
+            background-color: #ffffff;
+            color: #003087; /* الأزرق الرسمي لبلايستيشن */
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+            margin-top: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .nav-links {
             list-style: none;
@@ -183,7 +202,10 @@
 
     <!-- القائمة العلوية -->
     <nav>
-        <a href="#" class="logo"><span>b</span>Bilihub</a>
+        <div class="logo-container">
+            <a href="#" class="logo"><span>b</span>Bilihub</a>
+            <div class="ps5-badge">PS5</div>
+        </div>
         <ul class="nav-links">
             <li><a href="#">الرئيسية</a></li>
             <li><a href="#">ألعاب الكمبيوتر</a></li>
@@ -223,7 +245,6 @@
             
             <!-- بطاقة لعبة 1 -->
             <div class="game-card">
-                <!-- استبدل src برابط غلاف اللعبة العمودي لاحقاً -->
                 <div class="game-thumbnail" style="display: flex; align-items: center; justify-content: center; color: #a0a5ad;">[ غلاف اللعبة 1 ]</div>
                 <div class="game-info">
                     <h4 class="game-name">اسم اللعبة الأولى</h4>
@@ -238,26 +259,6 @@
                 <div class="game-info">
                     <h4 class="game-name">اسم اللعبة الثانية</h4>
                     <div class="game-category">عالم مفتوح / مغامرات</div>
-                    <a href="#" class="btn-action">تحميل اللعبة</a>
-                </div>
-            </div>
-
-            <!-- بطاقة لعبة 3 -->
-            <div class="game-card">
-                <div class="game-thumbnail" style="display: flex; align-items: center; justify-content: center; color: #a0a5ad;">[ غلاف اللعبة 3 ]</div>
-                <div class="game-info">
-                    <h4 class="game-name">اسم اللعبة الثالثة</h4>
-                    <div class="game-category">ألعاب خفيفة / استراتيجية</div>
-                    <a href="#" class="btn-action">تحميل اللعبة</a>
-                </div>
-            </div>
-
-            <!-- بطاقة لعبة 4 -->
-            <div class="game-card">
-                <div class="game-thumbnail" style="display: flex; align-items: center; justify-content: center; color: #a0a5ad;">[ غلاف اللعبة 4 ]</div>
-                <div class="game-info">
-                    <h4 class="game-name">اسم اللعبة الرابعة</h4>
-                    <div class="game-category">ألعاب سباقات / سرعة</div>
                     <a href="#" class="btn-action">تحميل اللعبة</a>
                 </div>
             </div>
