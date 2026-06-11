@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilihub | عالم الألعاب والشروحات</title>
+    <!-- استدعاء أيقونات FontAwesome المحدثة -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -27,7 +28,7 @@
         /* ==================== القائمة العلوية الذكية والمحسنة ==================== */
         nav {
             background-color: var(--bg-card);
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,40 +38,50 @@
             top: 0;
             z-index: 1000;
         }
+        
+        /* الحاوية الخاصة بالشعار لترتيب الاسم وتحته الـ PS5 */
         .logo-container {
             display: flex;
-            align-items: center;
-            gap: 6px;
+            flex-direction: column;
+            align-items: flex-start; /* يضمن مواءمة الشارة تحت الاسم مباشرة */
             cursor: pointer;
             flex-shrink: 0;
+            line-height: 1;
         }
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #ffffff;
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
         .logo span { color: var(--accent-blue); }
+        
+        /* تعديل شارة الـ PS5 لتظهر بالكامل تحت اسم bili */
         .ps5-badge {
             background-color: #ffffff;
             color: #003087;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 900;
-            padding: 1px 5px;
-            border-radius: 4px;
+            padding: 1px 6px;
+            border-radius: 3px;
             letter-spacing: 0.5px;
+            margin-top: 2px; /* مسافة بسيطة تحت الاسم */
+            align-self: flex-start;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
+
         .nav-links {
             list-style: none;
             display: flex;
             gap: 15px;
             margin: 0;
             padding: 0;
-            overflow-x: auto; /* يسمح بالتمرير الأفقي على الهواتف دون تخريب الهيدر */
+            overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
         }
-        .nav-links::-webkit-scrollbar { display: none; } /* إخفاء شريط التمرير المزعج */
+        .nav-links::-webkit-scrollbar { display: none; }
         
         .nav-links a {
             color: var(--text-muted);
@@ -176,11 +187,11 @@
             padding: 8px 30px 8px 12px;
             border-radius: 20px;
             outline: none;
-            width: 140px;
+            width: 130px;
             font-size: 0.85rem;
             transition: width 0.3s;
         }
-        .search-box input:focus { width: 180px; border-color: var(--accent-blue); }
+        .search-box input:focus { width: 170px; border-color: var(--accent-blue); }
         .search-box i {
             position: absolute;
             right: 10px;
@@ -189,7 +200,6 @@
             color: var(--text-muted);
         }
 
-        /* تعديل شبكة العرض لتصبح عمودين ممتازين على الهاتف وثلاثة أو أربعة على الكمبيوتر */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -213,7 +223,7 @@
         }
         .game-thumb {
             width: 100%;
-            aspect-ratio: 3 / 4; /* يحافظ على أبعاد البوستر الاحترافية للألعاب مثل الصورة تماماً */
+            aspect-ratio: 3 / 4;
             background-color: #25292e;
             background-size: cover;
             background-position: center;
@@ -302,8 +312,10 @@
 </head>
 <body>
 
+    <!-- ==================== 1. الصفحة الترحيبية ==================== -->
     <div id="page-welcome" class="page active-page">
         <nav>
+            <!-- وضع الشارة تحت الاسم مباشرة هنا -->
             <div class="logo-container">
                 <div class="logo"><span>b</span>Bilihub</div>
                 <div class="ps5-badge">PS5</div>
@@ -336,8 +348,10 @@
     </div>
 
 
+    <!-- ==================== 2. صفحة معرض الألعاب ==================== -->
     <div id="page-gallery" class="page">
         <nav>
+            <!-- وضع الشارة تحت الاسم مباشرة هنا أيضاً للتناسق التام -->
             <div class="logo-container" onclick="navigateTo('page-welcome')">
                 <div class="logo"><span>b</span>Bilihub</div>
                 <div class="ps5-badge">PS5</div>
@@ -360,11 +374,13 @@
             </div>
 
             <div class="games-grid" id="games-container">
-                </div>
+                <!-- الألعاب تولد هنا تلقائياً -->
+            </div>
         </div>
     </div>
 
 
+    <!-- ==================== 3. صفحة تفاصيل اللعبة والتحميل ==================== -->
     <div id="page-details" class="page">
         <nav>
             <div class="logo-container" onclick="navigateTo('page-gallery')">
@@ -378,11 +394,12 @@
         </nav>
 
         <div class="container" id="details-container">
-            </div>
+            <!-- تفاصيل اللعبة المحددة تولد هنا -->
+        </div>
     </div>
 
+    <!-- جافا سكريبت للربط الذكي والديناميكي -->
     <script>
-        // داتا الألعاب متضمنة صور بوسترات رأسية عالية الدقة والوضوح ومجانية بالكامل ومثالية لموقعك
         const gamesData = [
             {
                 id: "warzone",
@@ -481,7 +498,7 @@
 
                         <div class="download-box">
                             <h4 style="margin:0 0 5px 0; color:#fff;"><i class="fa-solid fa-circle-info" style="color:var(--accent-blue)"></i> تنبيه تخطي الروابط الإعلانية:</h4>
-                            <p style="margin:0 0 12px 0; font-size:0.8rem; color:var(--text-muted)">إذا واجهتك نوافذ منبثقة مزعجة، لا تقلق! انتظر التنازلي وتخطى الإعلانات فوراً للوصول لملف اللعبة المباشر.</p>
+                            <p style="margin:0 0 12px 0; font-size:0.8rem; color:var(--text-muted)">إذا واجهتك نوافذ منبثقة مزعجة، لا تقلح! انتظر التنازلي وتخطى الإعلانات فوراً للوصول لملف اللعبة المباشر.</p>
                             <a href="#" class="btn-main-download" onclick="alert('سيتم توجيهك الآن لروابط تحميل ملفات اللعبة بأمان عبر Bilihub!')"><i class="fa-solid fa-download"></i> تحميل اللعبة برابط مباشر</a>
                         </div>
                     </div>
@@ -493,17 +510,4 @@
                         <div class="review-header">
                             <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                             <div>
-                                <div class="user-name">زائر محترف</div>
-                                <div style="color:#f1c40f; font-size:0.7rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                            </div>
-                        </div>
-                        <p style="margin:0; color:var(--text-muted); font-size:0.85rem;">الموقع والروابط تعمل بنجاح مذهل على هاتفي وحاسوبي، التنسيق الرمادي مريح جداً للعين أثناء الليل!</p>
-                    </div>
-                </div>
-            `;
-            
-            navigateTo('page-details');
-        }
-    </script>
-</body>
-</html>
+         
